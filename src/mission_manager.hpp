@@ -1,0 +1,25 @@
+#ifndef MISSION_MANAGER_HPP_
+#define MISSION_MANAGER_HPP_
+
+#include <vector>
+#include <cmath>
+
+struct Waypoint { double lat, lon; };
+
+class MissionManager {
+public:
+    MissionManager();
+    void add_waypoint(double lat, double lon);
+    Waypoint get_current_target() const;
+    bool is_at_destination(double cur_lat, double cur_lon, double tolerance_m);
+    bool next_waypoint();
+    bool is_mission_finished() const;
+    double calculate_distance(double lat1, double lon1, double lat2, double lon2);
+
+private:
+    std::vector<Waypoint> waypoints_;
+    size_t current_wp_index_ = 0;
+    
+};
+
+#endif
